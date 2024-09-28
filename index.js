@@ -85,7 +85,7 @@ async function run() {
 
     //update//
       
-
+ 
     app.get('/carData/:id',  async(req, res) => {
       
       const id = req.params.id 
@@ -104,16 +104,17 @@ async function run() {
           console.log(id, UpUsers)
           const filter = { _id: new ObjectId(id) }
           const option = {upsert: true}
-          const UpDateUsers = {
-            
+          const upDtUsers = req.body
+          const Carz = {
+             
             $set: {
 
-              name: UpUsers.name ,
-              photourl: UpUsers.photourl,
-              brand: UpUsers.brand,
-              price: UpUsers.price,
-              category: UpUsers.category,
-              description: UpUsers.description,
+              name: upDtUsers.name ,
+              photourl: upDtUsers.photourl,
+              brand: upDtUsers.brand,
+              price: upDtUsers.price,
+              category: upDtUsers.category,
+              description: upDtUsers.description,
              
 
 
@@ -121,14 +122,14 @@ async function run() {
 
           }
 
-          const result = await carCollection.updateOne(filter, option, UpDateUsers)
+          const result = await carCollection.updateOne(filter, Carz,  option)
           res.send(result)
 
-
+ 
    })  
 
  
-
+ 
     //update//
 
 
