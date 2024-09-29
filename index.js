@@ -47,8 +47,17 @@ async function run() {
       
        const users = req.body 
        console.log(users)
-       const token = jwt.sign(users, 'secret', {expiresIn: '1h'})
-       res.send(token)
+       const token = jwt.sign(users, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '1h'})
+       res
+       .cookie('token',  token, {
+
+           httpOnly: true,
+           secure: false, 
+           sameSite: 'none'   
+
+
+       } )
+       .send({success: true})
 
     })
 
