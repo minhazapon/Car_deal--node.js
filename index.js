@@ -1,5 +1,6 @@
 const express = require('express')
 const cors = require('cors')
+const jwt = require('jsonwebtoken')
 require('dotenv').config()
 const app = express()
 const port = process.env.PORT || 5000
@@ -37,6 +38,23 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
     // Send a ping to confirm a successful connection
+ 
+
+    //JWT Token Api Auth
+
+  
+    app.post('/jwt',  async(req, res) => {
+      
+       const users = req.body 
+       console.log(users)
+       const token = jwt.sign(users, 'secret', {expiresIn: '1h'})
+       res.send(token)
+
+    })
+
+
+ 
+    //JWT Token Api Auth
 
     //crud//
 
